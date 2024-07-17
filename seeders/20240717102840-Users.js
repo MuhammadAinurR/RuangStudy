@@ -2,7 +2,6 @@
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(8);
 
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
