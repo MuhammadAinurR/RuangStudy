@@ -1,5 +1,11 @@
-const { User } = require('../models')
+const { User, Course, UserCourse, UserProfile } = require('../models')
 const bcrypt = require('bcryptjs');
+
+// dummy session
+const user = {
+    id: 2,
+    email: "ainurmoh@gmail.com",
+}
 
 class UserController {
     static async register(req, res) {
@@ -26,13 +32,12 @@ class UserController {
 
     static async loginPost(req, res) {
         const { email, password } = req.body;
-        
+
         try {
             const user = await User.findOne({ where: { email } });
             if (!user) throw new Error('Email not found');
             const isValidPassword = await bcrypt.compare(password, user.password);
             if (!isValidPassword) throw new Error('Sorry, your password was incorrect.');
-            console.log(user)
             req.session.user = { id: user.id, email: user.email, role: user.role }; // set session on controller when logged in
             res.redirect('/dashboard');
         } catch (error) {
@@ -43,9 +48,25 @@ class UserController {
 
     static async dashboard(req, res) {
         try {
-            res.render('user-dashboard')
+            // const { user } = req.session
+            const userProfile = await User.findByPk(user.id, {
+                include: {
+                    model: UserProfile,
+                    attributes: ['name']
+                },
+                attributes: ['id', 'email']
+            });
+            const courseDetails = await User.findByPk(user.id, {
+                include: {
+                    model: Course
+                },
+                attributes: ['id']
+            })
+            console.log(courseDetails.dataValues)
+            res.render('user-dashboard', { userProfile, courseDetails })
         } catch (error) {
-            
+            console.log(error)
+            res.send(error)
         }
     }
 }

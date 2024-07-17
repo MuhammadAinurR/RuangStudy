@@ -25,6 +25,9 @@ module.exports = (sequelize, DataTypes) => {
       beforeCreate: (user, options) => {
         user.role = 'public'
         user.password = bcrypt.hashSync(user.password, salt)
+      },
+      afterCreate: (user, options) => {
+        sequelize.models.UserProfile.create({UserId: user.id, createdAt: new Date(), updatedAt: new Date()})
       }
     },
     sequelize,

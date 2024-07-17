@@ -5,6 +5,16 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>selamat datang </h1>
+    <%= JSON.stringify(userProfile) %>
+    <%= JSON.stringify(courseDetails) %>
+    <h1>selamat datang <%= userProfile.UserProfile.name ? userProfile.UserProfile.name : userProfile.email%></h1>
+    <div>
+        <p>Aktivitas Belajar</p>
+        <div>
+            <% courseDetails.Courses.forEach(e => { %>
+             <p><%= e.name %></p>
+            <% }) %>
+        </div>
+    </div>
 </body>
 </html>

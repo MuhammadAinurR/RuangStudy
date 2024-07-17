@@ -6,7 +6,7 @@ router.get('/register', UserController.register)
 router.get('/login', UserController.login)
 router.post('/login', UserController.loginPost)
 
-router.use(isLoggedin)
+// router.use(isLoggedin)
 router.get('/dashboard', UserController.dashboard)
 
 module.exports = router;
