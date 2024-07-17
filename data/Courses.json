@@ -1,0 +1,37 @@
+[
+    {
+        "CategoriesId": 1,
+        "name": "Tailwind basic",
+        "description": "Belajar tailwind guys",
+        "image": "image",
+        "jumlahModul": 5
+    },
+    {
+        "CategoriesId": 1,
+        "name": "Bootstrap basic",
+        "description": "Belajar tailwind guys",
+        "image": "image",
+        "jumlahModul": 5
+    },
+    {
+        "CategoriesId": 2,
+        "name": "Rest-API",
+        "description": "Belajar tailwind guys",
+        "image": "image",
+        "jumlahModul": 5
+    },
+    {
+        "CategoriesId": 2,
+        "name": "Golang basic",
+        "description": "Belajar tailwind guys",
+        "image": "image",
+        "jumlahModul": 5
+    },
+    {
+        "CategoriesId": 2,
+        "name": "Python basic",
+        "description": "Belajar tailwind guys",
+        "image": "image",
+        "jumlahModul": 5
+    }
+]
