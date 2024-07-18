@@ -51,6 +51,26 @@ class AdminController {
         }
     }
 
+    static async getCoursesByCategories(req, res){
+        const { id } = req.params;
+        try {
+            const courses = await Course.findAll({ 
+                where: {CategoryId: id},
+                include: {
+                    model: User
+                }
+             });
+
+             const cat = await Category.findByPk(id)
+
+            //  res.send(courses)
+            res.render('admin/CoursesByCategory', { courses, cat });
+        } catch (error) {
+            console.log(error);
+            res.send(error);
+        }
+    }
+
     static async getCourses(req, res){
         const { search, msg } = req.query;
         try {

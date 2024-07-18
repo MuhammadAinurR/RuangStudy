@@ -8,6 +8,7 @@ router.get('/admin', AdminController.home);
 router.get('/admin/categories', AdminController.getCategories);
 router.get('/admin/categories/add', AdminController.getAddCategories);
 router.post('/admin/categories/add', AdminController.postAddCategories);
+router.get('/admin/categories/:id/courses', AdminController.getCoursesByCategories);
 
 //courses
 router.get('/admin/courses', AdminController.getCourses);
