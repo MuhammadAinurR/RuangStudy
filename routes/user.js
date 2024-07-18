@@ -13,10 +13,10 @@ router.post('/login', UserController.loginPost)
 router.get('/courses', PublicController.courses)
 
 // force dummy login
-// router.use((req, res, next) => {
-//     req.session.user = { id: 1, email: "ainurmoh@gmail.com", role: "SuperUser", image: "https://as2.ftcdn.net/v2/jpg/00/81/49/73/1000_F_81497385_G0PLVpeTpxNmMpmrd1X5ZhcBeNuYEfdK.jpg" };
-//     next()
-// })
+router.use((req, res, next) => {
+    req.session.user = { id: 1, email: "ainurmoh@gmail.com", role: "SuperUser", image: "https://as2.ftcdn.net/v2/jpg/00/81/49/73/1000_F_81497385_G0PLVpeTpxNmMpmrd1X5ZhcBeNuYEfdK.jpg" };
+    next()
+})
 
 // login middleware
 router.use(isLoggedin)

@@ -66,7 +66,7 @@ class UserController {
                 },
                 attributes: ['id']
             })
-            res.render('user-dashboard', { userProfile, courseDetails, userImage: user.image, message })
+            res.render('user-dashboard', { userProfile, courseDetails, user, message })
         } catch (error) {
             res.send(error)
         }
@@ -86,7 +86,7 @@ class UserController {
                 attributes: ['id'],
                 order: [[{ model: Course}, 'name', 'ASC']]
             })
-            res.render('academy', { allCourses, userCourses, userImage: user.image})
+            res.render('academy', { allCourses, userCourses, user})
         } catch (error) {
             res.send(error)
         }
@@ -104,7 +104,7 @@ class UserController {
                     CourseId: id
                 }
             })
-            res.render('course', { course, userEnrolled, userImage: user.image })
+            res.render('course', { course, userEnrolled, user })
         } catch (error) {
             
         }
@@ -118,7 +118,7 @@ class UserController {
                 include: Course,
                 order: [[{model: Course}, 'name', 'ASC']]
             })
-            res.render('category', { pathCourses, userImage: user.image })
+            res.render('category', { pathCourses, user })
         } catch (error) {
             res.send(error)
         }
@@ -140,7 +140,7 @@ class UserController {
         const { CourseId } = req.params;
         try {
             const course = await Course.findByPk(CourseId);
-            res.render('purchase', { message, user, userImage: user.image, course })
+            res.render('purchase', { message, user, course })
         } catch (error) {
             res.send(error)
         }
