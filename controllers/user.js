@@ -89,6 +89,7 @@ class UserController {
             const allCategories = await Category.findAll()
 
             if (category === 'myclass') {
+                if (!user) return res.redirect('/login');
                 userCourses = await User.findByPk(user.id, {
                     include: {
                         model: Course
