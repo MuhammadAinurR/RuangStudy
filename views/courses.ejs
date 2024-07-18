@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#F4F4F5] h-full">
+    <main class="flex justify-center">
+        <div class="w-[80%]">
+            <div class="my-4 flex gap-4">
+                <a href="/courses"><button id="all-courses-list-button" class="bg-white px-3 py-2 rounded-md shadow-md font-light">Semua Kelas</button></a>
+                <% allCategories.forEach(e => { %>
+                    <a href="/courses?category=<%= e.id %>"><button id="user-courses-list-button" class="px-3 py-2 rounded-md shadow-md font-light"><%= e.name %></button></a>
+                <% }) %>
+            </div>
+            <div id="all-courses-list" class=" my-5">
+                <div class="grid grid-cols-4 gap-5">
+                    <% allCourses.forEach(e => { %>
+                        <a href="/course/<%= e.id %>">
+                            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow h-[300px]">
+                                <img class="h-3/5 w-full rounded-t-lg" src="<%= e.image %>" alt="" />
+                                <div class="h-2/5 p-3">
+                                    <div class="h-full flex flex-col justify-between">
+                                        <h5 class="mb-2 text-2xl tracking-tight text-gray-900"><%= e.name %></h5>
+                                        <p>Course</p>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                            <% }) %>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>
