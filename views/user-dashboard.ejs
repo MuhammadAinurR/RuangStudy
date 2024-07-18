@@ -3,18 +3,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <%= JSON.stringify(userProfile) %>
-    <%= JSON.stringify(courseDetails) %>
-    <h1>selamat datang <%= userProfile.UserProfile.name ? userProfile.UserProfile.name : userProfile.email%></h1>
-    <div>
-        <p>Aktivitas Belajar</p>
-        <div>
-            <% courseDetails.Courses.forEach(e => { %>
-             <p><%= e.name %></p>
-            <% }) %>
-        </div>
-    </div>
+    <%- include('./partials/navbar', { userImage }) %>
+    <main class="flex justify-center bg-[#F4F4F5] h-full">
+        <div class="w-full">
+            <div class="w-full text-white bg-[#03405F] flex justify-center">
+                <div class="w-[80%] py-[80px]">
+                    <h1 class="text-4xl">Selamat datang <%= userProfile.UserProfile.name ? userProfile.UserProfile.name : userProfile.email%>!</h1>
+                    <p class="font-light">Semoga aktifitas belajarmu menyenangkan.</p>
+                </div>
+            </div>
+ 
+            <div class="w-full flex justify-center mt-5">
+                <div class="w-[80%] grid grid-cols-2 gap-5">
+                    <div class="p-4 bg-white shadow-lg rounded-md">
+                        <p>Aktivitas Belajar</p>
+                        <hr>
+                        <% courseDetails.Courses.forEach(e=> { %>
+                           <div class="bg-[#F4F4F5] p-4 mt-2 rounded-md">
+                                <p>Sedang dipelajari</p>
+                                <div class="flex justify-between ">
+                                    <p class="font-extralight"><%= e.name %></p>
+                                    <a class="font-extralight" href="/course/<%= e.id %>">Lanjutkan</a>
+                                </div>
+                           </div>
+                        <% }) %>
+                    </div>
+                    <div class=" bg-red-500 ">
+                        <p>Aktivitas Lain</p>
+                    </div>
+                </div>
+            </div>
+       </div>
+    </main>
 </body>
 </html>

@@ -1,11 +1,5 @@
-const { User, Course, UserCourse, UserProfile } = require('../models')
+const { User, Course, UserCourse, UserProfile, Category } = require('../models')
 const bcrypt = require('bcryptjs');
-
-// dummy session
-const user = {
-    id: 2,
-    email: "ainurmoh@gmail.com",
-}
 
 class UserController {
     static async register(req, res) {
@@ -46,9 +40,18 @@ class UserController {
         }
     }
 
+    static logOut(req, res) {
+        try {
+            if (req.session) req.session.destroy();
+            res.redirect(`/login?message=logout success`)
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
     static async dashboard(req, res) {
         try {
-            // const { user } = req.session
+            const { user } = req.session
             const userProfile = await User.findByPk(user.id, {
                 include: {
                     model: UserProfile,
@@ -62,12 +65,60 @@ class UserController {
                 },
                 attributes: ['id']
             })
-            console.log(courseDetails.dataValues)
-            res.render('user-dashboard', { userProfile, courseDetails })
+            res.render('user-dashboard', { userProfile, courseDetails, userImage: user.image })
         } catch (error) {
             console.log(error)
             res.send(error)
         }
     }
+
+    static async academy(req, res) {
+        try {
+            const { user } = req.session
+            const allCourses = await Course.findAll();
+
+            const userCourses = await User.findByPk(user.id, {
+                include: {
+                    model: Course
+                },
+                attributes: ['id']
+            })
+            res.render('academy', { allCourses, userCourses, userImage: user.image })
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async course(req, res) {
+        const { user } = req.session
+        const { id } = req.params
+        try {
+            const course = await Course.findByPk(id, {
+                include: Category
+            })
+            const userEnrolled = await UserCourse.count({
+                where: {
+                    CourseId: id
+                }
+            })
+            res.render('course', { course, userEnrolled, userImage: user.image })
+        } catch (error) {
+            
+        }
+    }
+
+    static async category(req, res) {
+        const { user } = req.session
+        const { id } = req.params;
+        try {
+            const pathCourses = await Category.findByPk(id, {
+                include: Course
+            })
+            res.render('category', { pathCourses, userImage: user.image })
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
 }
 module.exports = UserController;
