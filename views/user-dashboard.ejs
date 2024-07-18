@@ -16,11 +16,17 @@
                 </div>
             </div>
  
+            <% if (message) { %>
+                <p class="text-center text-green-700 bg-green-200 py-2"><%= message %></p>
+            <% } %>
             <div class="w-full flex justify-center mt-5">
                 <div class="w-[80%] grid grid-cols-2 gap-5">
                     <div class="p-4 bg-white shadow-lg rounded-md">
                         <p>Aktivitas Belajar</p>
                         <hr>
+                        <% if (courseDetails.Courses.length === 0) { %>
+                         <p class="text-center my-5">Anda masih belum memiliki kelas aktif, pergi ke <a class="underline underline-offset-2" href="/academy">Academy</a> untuk memilih kelas</p>
+                        <% } %>
                         <% courseDetails.Courses.forEach(e=> { %>
                            <div class="bg-[#F4F4F5] p-4 mt-2 rounded-md">
                                 <p>Sedang dipelajari</p>

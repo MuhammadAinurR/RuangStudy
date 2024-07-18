@@ -51,6 +51,7 @@ class UserController {
 
     static async dashboard(req, res) {
         try {
+            const { message } = req.query;
             const { user } = req.session
             const userProfile = await User.findByPk(user.id, {
                 include: {
@@ -65,9 +66,8 @@ class UserController {
                 },
                 attributes: ['id']
             })
-            res.render('user-dashboard', { userProfile, courseDetails, userImage: user.image })
+            res.render('user-dashboard', { userProfile, courseDetails, userImage: user.image, message })
         } catch (error) {
-            console.log(error)
             res.send(error)
         }
     }
@@ -86,8 +86,7 @@ class UserController {
                 attributes: ['id'],
                 order: [[{ model: Course}, 'name', 'ASC']]
             })
-            console.log(userCourses.dataValues)
-            res.render('academy', { allCourses, userCourses, userImage: user.image })
+            res.render('academy', { allCourses, userCourses, userImage: user.image})
         } catch (error) {
             res.send(error)
         }
@@ -121,6 +120,42 @@ class UserController {
             })
             res.render('category', { pathCourses, userImage: user.image })
         } catch (error) {
+            res.send(error)
+        }
+    }
+    
+    static async courseClass(req, res) {
+        const { id } = req.params;
+        const kelas = await Course.findByPk(id) 
+        try {
+            res.render('course-class', { kelas })
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async purchase(req, res) {
+        const { user } = req.session
+        const { message } = req.query
+        const { CourseId } = req.params;
+        try {
+            const course = await Course.findByPk(CourseId);
+            res.render('purchase', { message, user, userImage: user.image, course })
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async purchasePost(req, res) {
+        try {
+            await UserCourse.create({
+                ...req.params,
+                createdAt: new Date(),
+                deletedAt: new Date()
+            })
+            res.redirect('/dashboard?message=selamat kelas anda telah bertambah')
+        } catch (error) {
+            console.log(error)
             res.send(error)
         }
     }

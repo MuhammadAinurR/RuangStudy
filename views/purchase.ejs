@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <%- include('./partials/navbar') %>
+    <main class="flex justify-center">
+        <div>
+            <div class="bg-blue p-3 rounded-md mt-3 w-[600px] text-center bg-red-400">
+                <p class="text-white"><%= message %></p>
+            </div>
+            <p>apakah anda ingin membeli <%= course.name %>?</p>
+            <form action="" method="post">
+                <button class="bg-blue-200 px-3 py-1 rounded-md">beli sekarang</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
