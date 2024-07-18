@@ -44,7 +44,6 @@ module.exports = (sequelize, DataTypes) => {
               );
               console.log('SUCCESS SENDING EMAIL CREATION!');
             } catch (err) {
-            
               console.log('ERROR', err);
             }
       }
