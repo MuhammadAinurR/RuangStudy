@@ -17,7 +17,7 @@
                     <label for="">Image</label>
                     <input class="border pl-2" type="text" name="image" id="" value="<%= selectedUser.image %>">
                     <label for="">Date of Birth</label>
-                    <input class="border pl-2" type="date" name="dob" id="" value="<%= dateFormat(selectedUser.dob) %>">
+                    <input class="border pl-2" type="date" name="dob" id="" value="<%= selectedUser.dob ? dateFormat(selectedUser.dob) : ''%>">
                     <label for="">Place of Birth</label>
                     <input class="border pl-2" type="text" name="pob" id="" value="<%= selectedUser.pob %>">
                     <label for="">Phone Number</label>
