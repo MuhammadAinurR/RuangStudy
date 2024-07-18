@@ -2,11 +2,13 @@ const { Op } = require('sequelize');
 const dateFormat = require('../helpers/dateFormat');
 const { User, Course, UserCourse, UserProfile, Category } = require('../models')
 const bcrypt = require('bcryptjs');
+const errorFormat = require('../helpers/errorFormat');
 
 class UserController {
     static async register(req, res) {
         const { email, password, confirmPassword, message } = req.query;
         try {
+            console.log(req.query)
             if (password != confirmPassword) return res.redirect("/register?message=password doesn't match")
             if (email && password) {
                 await User.create({
@@ -18,8 +20,13 @@ class UserController {
             }
             res.render('register-form', { message })
         } catch (error) {
+            console.log(error)
             if (error.name === "SequelizeUniqueConstraintError") {
                 return res.redirect("/register?message=email already registered")
+            }
+            if (error.name === "SequelizeValidationError") {
+                // validation 
+                return res.redirect(`/register?message=${errorFormat(error)}`)
             }
             res.send(error)
         }
@@ -41,7 +48,6 @@ class UserController {
             req.session.user = { id: user.id, email: user.email, role: user.role, image: user.UserProfile.image }; // set session on controller when logged in
             res.redirect('/dashboard');
         } catch (error) {
-            console.error(error.message);
             res.status(401).redirect(`/login?message=${error.message}`); // Unauthorized status for incorrect email/password
         }
     }

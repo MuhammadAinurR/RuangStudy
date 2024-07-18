@@ -19,13 +19,40 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    role: DataTypes.STRING
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: {
+          args: true,
+          msg: 'email format is not valid'
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [8,20],
+          msg: 'password should more than 7 characters'
+        },
+      }
+    },
+    role: {
+      type: DataTypes.STRING,
+      validate: {
+        isIn: {
+          args: [['SuperUser', 'Public']],
+          msg: 'role is not valid'
+        }
+      }
+    }
   }, {
     hooks: {
       beforeCreate: (user, options) => {
-        user.role = 'public'
+        user.role = 'Public'
         user.password = bcrypt.hashSync(user.password, salt)
       },
       afterCreate: (user, options) => {
