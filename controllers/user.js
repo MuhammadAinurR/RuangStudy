@@ -71,7 +71,6 @@ class UserController {
                 },
                 attributes: ['id']
             })
-            console.log(user)
             res.render('user-dashboard', { userProfile, courseDetails, user, message })
         } catch (error) {
             res.send(error)

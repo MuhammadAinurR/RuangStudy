@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const PublicController = require('../controllers/public');
 const UserController = require('../controllers/user');
-const { isLoggedin }= require('../middlewares/auth');
+const { isLoggedin, publicAcademy, publicDashboard }= require('../middlewares/auth');
 const { isPurchase } = require('../middlewares/purchaseStatus');
 
 router.get('/', UserController.landing)
@@ -12,6 +12,10 @@ router.post('/login', UserController.loginPost)
 
 router.get('/courses', PublicController.courses)
 router.get('/event', PublicController.event)
+router.get('/academy', publicAcademy, UserController.academy)
+router.get('/course/:id', UserController.course)
+router.get('/home', PublicController.home)
+router.get('/dashboard', publicDashboard, UserController.dashboard)
 
 // force dummy login => Uncomment to force the login so the development will be easier
 // router.use((req, res, next) => {
@@ -21,10 +25,7 @@ router.get('/event', PublicController.event)
 
 // login middleware
 router.use(isLoggedin)
-router.get('/course/:id', UserController.course)
 router.get('/course/:id/class', isPurchase, UserController.courseClass)
-router.get('/dashboard', UserController.dashboard)
-router.get('/academy', UserController.academy)
 router.get('/category/:id', UserController.category)
 router.get('/purchase/:UserId/:CourseId', UserController.purchase)
 router.post('/purchase/:UserId/:CourseId', UserController.purchasePost)

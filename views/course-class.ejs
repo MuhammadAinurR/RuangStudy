@@ -1,11 +1,31 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        /* Centering container */
+        body {
+            height: 100vh; /* Ensure full viewport height */
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            background-color: #1F2937;
+            margin: 0; /* Remove default margin */
+            color: white;
+        }
+
+        /* Styling for headings */
+        h1 {
+            text-align: center; /* Center text within h1 */
+        }
+    </style>
 </head>
 <body>
-    <h1>ini adalah kelas <%= kelas.name %></h1>
-    <h1>maaf kelas saat ini sedang masa perbaikan</h1>
+    <div>
+        <h1>ini adalah kelas <%= kelas.name %></h1>
+        <h1>page ini berisi tentang materi <%= kelas.name %></h1>
+    </div>
 </body>
 </html>

@@ -11,6 +11,16 @@ const isSuperUser = (req, res, next) => {
     next();
 }
 
+const publicAcademy = (req, res, next) => {
+    if (req.session.user) return next();
+    res.redirect('/courses')
+}
+
+const publicDashboard = (req, res, next) => {
+    if (req.session.user) return next();
+    res.redirect('/home')
+}
+
 const sessionConfig = session({
     secret: 'secret101',
     resave: false,
@@ -21,4 +31,4 @@ const sessionConfig = session({
     }
 })
 
-module.exports = { isLoggedin, sessionConfig, isSuperUser };
+module.exports = { isLoggedin, sessionConfig, isSuperUser, publicAcademy, publicDashboard };

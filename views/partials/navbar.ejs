@@ -4,12 +4,12 @@
     <div class="relative flex h-16 items-center justify-center">
       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex flex-shrink-0 items-center">
-          <a href="/"><p class="text-[#6366F1]">Ruang Study</p></a>
+          <a href="/home"><p class="text-[#6366F1]">Ruang Study</p></a>
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="/dashboard" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Home</a>
+            <a href="/dashboard" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
             <a href="/academy" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Academy</a>
             <a href="/event" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Event</a>
           </div>
@@ -22,10 +22,11 @@
             <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
               Login
             </button>
+          </a>
         <% } %>
         <!-- Profile dropdown -->
         <% if (user !== undefined) { %>
-          </a>
+          <p class="text-gray-100"><%= user.email %></p>
           <div class="relative ml-3">
             <div>
               <button type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">

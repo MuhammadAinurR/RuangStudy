@@ -6,14 +6,14 @@ class PublicController {
         const { user } = req.session
         try {
             let where = {}
-            if (category) {
-                where = {CategoryId: category}
-            }
+            if (category) where = { CategoryId: category }
             const allCourses = await Course.findAll({
                 where: where,
                 order: [['name', 'ASC']]
             });
+
             const allCategories = await Category.findAll()
+
             res.render('courses', { allCourses, allCategories, user })
         } catch (error) {
             res.send(error)
@@ -29,5 +29,9 @@ class PublicController {
         }
     }
 
+    static async home(req, res) {
+        const { user } = req.session
+        res.render('home', { user })
+    }
 }
 module.exports = PublicController;
