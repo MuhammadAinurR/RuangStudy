@@ -75,14 +75,18 @@ class UserController {
     static async academy(req, res) {
         try {
             const { user } = req.session
-            const allCourses = await Course.findAll();
+            const allCourses = await Course.findAll({
+                order: [['name', 'ASC']]
+            });
 
             const userCourses = await User.findByPk(user.id, {
                 include: {
                     model: Course
                 },
-                attributes: ['id']
+                attributes: ['id'],
+                order: [[{ model: Course}, 'name', 'ASC']]
             })
+            console.log(userCourses.dataValues)
             res.render('academy', { allCourses, userCourses, userImage: user.image })
         } catch (error) {
             res.send(error)
@@ -112,7 +116,8 @@ class UserController {
         const { id } = req.params;
         try {
             const pathCourses = await Category.findByPk(id, {
-                include: Course
+                include: Course,
+                order: [[{model: Course}, 'name', 'ASC']]
             })
             res.render('category', { pathCourses, userImage: user.image })
         } catch (error) {

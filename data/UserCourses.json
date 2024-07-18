@@ -1,7 +1,15 @@
 [
     {
         "UserId": 1,
-        "CourseId": 1
+        "CourseId": 3
+    },
+    {
+        "UserId": 1,
+        "CourseId": 4
+    },
+    {
+        "UserId": 1,
+        "CourseId": 5
     },
     {
         "UserId": 2,

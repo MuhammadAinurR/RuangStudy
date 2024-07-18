@@ -3,35 +3,35 @@
         "CategoryId": 1,
         "name": "Tailwind basic",
         "description": "Belajar tailwind guys",
-        "image": "image",
+        "image": "https://miro.medium.com/v2/resize:fit:1400/1*_6ooq0R60ba3UT5c-QVemA.png",
         "jumlahModul": 5
     },
     {
         "CategoryId": 1,
         "name": "Bootstrap basic",
         "description": "Belajar tailwind guys",
-        "image": "image",
+        "image": "https://getbootstrap.com/docs/5.3/assets/img/bootstrap-icons.png",
         "jumlahModul": 5
     },
     {
         "CategoryId": 2,
         "name": "Rest-API",
         "description": "Belajar tailwind guys",
-        "image": "image",
+        "image": "https://www.datocms-assets.com/48294/1680848744-rest-api-1-rest-api.png?auto=format",
         "jumlahModul": 5
     },
     {
         "CategoryId": 2,
         "name": "Golang basic",
         "description": "Belajar tailwind guys",
-        "image": "image",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn9KiQDU-UBKjLt9fLXHjyd4YVLjoDgArveA&s",
         "jumlahModul": 5
     },
     {
         "CategoryId": 2,
         "name": "Python basic",
         "description": "Belajar tailwind guys",
-        "image": "image",
+        "image": "https://learnersgalaxy.ai/wp-content/uploads/2024/01/Python-Symbol.png",
         "jumlahModul": 5
     }
 ]
