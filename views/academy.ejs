@@ -9,14 +9,20 @@
     <%- include('./partials/navbar') %>
     <main class="flex justify-center">
         <div class="w-[80%]">
-            <div class="my-4 flex gap-4">
-                <a href="/academy"><button id="all-courses-list-button" class="bg-white px-3 py-2 rounded-md shadow-md font-light">Semua Kelas</button></a>
-                <% allCategories.forEach(e => { %>
-                    <a href="/academy?category=<%= e.id %>"><button id="user-courses-list-button" class="bg-white px-3 py-2 rounded-md shadow-md font-light"><%= e.name %></button></a>
-                <% }) %>
-                <% if (user) { %>
-                    <a href="/academy?category=myclass"><button id="user-courses-list-button" class="px-3 py-2 rounded-md shadow-md font-light bg-white">Kelas yang Dimiliki</button></a>
-                <% } %>
+            <div class="my-4 flex justify-between">
+                <div class="flex gap-4">
+                    <a href="/academy"><button id="all-courses-list-button" class="bg-white px-3 py-2 rounded-md shadow-md font-light">Semua Kelas</button></a>
+                    <% allCategories.forEach(e => { %>
+                        <a href="/academy?category=<%= e.id %>"><button id="user-courses-list-button" class="bg-white px-3 py-2 rounded-md shadow-md font-light"><%= e.name %></button></a>
+                    <% }) %>
+                    <% if (user) { %>
+                        <a href="/academy?category=myclass"><button id="user-courses-list-button" class="px-3 py-2 rounded-md shadow-md font-light bg-white">Kelas yang Dimiliki</button></a>
+                    <% } %>
+                </div>
+                <form action="" class="flex w-full max-w-lg shadow-md border rounded-lg">
+                    <input name="search" type="text" placeholder="Find your course" class="rounded-l-lg flex-1 px-2 md:px-4 py-2 bg-white placeholder-gray-600 focus:outline-none w-24 md:w-full">
+                    <button class="rounded-r-lg px-2 md:px-6 py-1 w-auto text-sm font-semibold text-white bg-[#1F2937] whitespace-no-wrap">Search</button>
+                </form>
             </div>
             <% if (userCourses.length === 0) { %>
                 <div id="all-courses-list" class=" my-5">
@@ -28,15 +34,15 @@
                                     <div class="h-2/5 p-3">
                                         <div class="h-full flex flex-col justify-between">
                                             <h5 class="mb-2 text-2xl tracking-tight text-gray-900"><%= e.name %></h5>
-                                            <p>Course</p>
+                                            <p class="font-light text-gray-500">Course</p>
                                         </div>
                                     </div>
                                 </div>
-                                </a>
-                                <% }) %>
+                            </a>
+                        <% }) %>
                     </div>
                 </div>
-            <% } %>
+            <% } %> 
             <% if (userCourses.length !== 0) { %>
                 <div id="user-courses-list" class="bg-white shadow-md rounded-md px-5 my-5">
                     <% userCourses.Courses.forEach(e => { %>

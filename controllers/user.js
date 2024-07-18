@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const dateFormat = require('../helpers/dateFormat');
 const { User, Course, UserCourse, UserProfile, Category } = require('../models')
 const bcrypt = require('bcryptjs');
@@ -80,7 +81,7 @@ class UserController {
     static async academy(req, res) {
         try {
             const { user } = req.session
-            const { category } = req.query
+            const { category, search } = req.query
             let userCourses = []
             let allCourses = []
             let where = {}
@@ -99,10 +100,12 @@ class UserController {
             }
 
             if (category) where = { CategoryId: category }
+            if (search) where = { name: {
+                [Op.iLike]: `%${search}%`
+            } }
             allCourses = await Course.findAll({ where: where, order: [['name', 'ASC']] });
             res.render('academy', { allCourses, userCourses, user, allCategories })
         } catch (error) {
-            console.log(error)
             res.send(error)
         }
     }
