@@ -10,60 +10,45 @@
     <main class="flex justify-center">
         <div class="w-[80%]">
             <div class="my-4 flex gap-4">
-                <button id="all-courses-list-button" class="bg-white px-3 py-2 rounded-md shadow-md font-light">Semua Kelas</button>
-                <button id="user-courses-list-button" class="px-3 py-2 rounded-md shadow-md font-light">Kelas yang Dimiliki</button>
+                <a href="/academy"><button id="all-courses-list-button" class="bg-white px-3 py-2 rounded-md shadow-md font-light">Semua Kelas</button></a>
+                <% allCategories.forEach(e => { %>
+                    <a href="/academy?category=<%= e.id %>"><button id="user-courses-list-button" class="bg-white px-3 py-2 rounded-md shadow-md font-light"><%= e.name %></button></a>
+                <% }) %>
+                <% if (user) { %>
+                    <a href="/academy?category=myclass"><button id="user-courses-list-button" class="px-3 py-2 rounded-md shadow-md font-light bg-white">Kelas yang Dimiliki</button></a>
+                <% } %>
             </div>
-            <div id="all-courses-list" class=" my-5">
-                <div class="grid grid-cols-4 gap-5">
-                    <% allCourses.forEach(e => { %>
-                        <a href="/course/<%= e.id %>">
-                            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow h-[300px]">
-                                <img class="h-3/5 w-full rounded-t-lg" src="<%= e.image %>" alt="" />
-                                <div class="h-2/5 p-3">
-                                    <div class="h-full flex flex-col justify-between">
-                                        <h5 class="mb-2 text-2xl tracking-tight text-gray-900"><%= e.name %></h5>
-                                        <p>Course</p>
+            <% if (userCourses.length === 0) { %>
+                <div id="all-courses-list" class=" my-5">
+                    <div class="grid grid-cols-4 gap-5">
+                        <% allCourses.forEach(e => { %>
+                            <a href="/course/<%= e.id %>">
+                                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow h-[300px]">
+                                    <img class="h-3/5 w-full rounded-t-lg" src="<%= e.image %>" alt="" />
+                                    <div class="h-2/5 p-3">
+                                        <div class="h-full flex flex-col justify-between">
+                                            <h5 class="mb-2 text-2xl tracking-tight text-gray-900"><%= e.name %></h5>
+                                            <p>Course</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            </a>
-                            <% }) %>
+                                </a>
+                                <% }) %>
+                    </div>
                 </div>
-            </div>
-            <div id="user-courses-list" class="hidden bg-white shadow-md rounded-md px-5 my-5">
-                <% userCourses.Courses.forEach(e => { %>
-                 <div class="flex justify-between">
-                    <p class="font-light py-4"><%= e.name %></p>
-                    <a href="/course/<%= e.id %>"><button class="bg-[#2D3E4F] text-white rounded-md my-3 px-2 py-1">Koridor Kelas</button></a>
-                 </div>
-                 <hr>
-                <% }) %>
-            </div>
+            <% } %>
+            <% if (userCourses.length !== 0) { %>
+                <div id="user-courses-list" class="bg-white shadow-md rounded-md px-5 my-5">
+                    <% userCourses.Courses.forEach(e => { %>
+                     <div class="flex justify-between">
+                        <p class="font-light py-4"><%= e.name %></p>
+                        <a href="/course/<%= e.id %>"><button class="bg-[#2D3E4F] text-white rounded-md my-3 px-2 py-1">Koridor Kelas</button></a>
+                     </div>
+                     <hr>
+                    <% }) %>
+                </div>
+            <% } %>
         </div>
     </main>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let allCoursesListButton = document.getElementById('all-courses-list-button')
-            let userCoursesListButton = document.getElementById('user-courses-list-button')
-
-            var allCoursesList = document.getElementById("all-courses-list");
-            var userCoursesList = document.getElementById("user-courses-list");
-
-            // Toggle menu visibility when clicking the button
-            allCoursesListButton.addEventListener("click", function () {
-                allCoursesList.classList.remove("hidden");
-                userCoursesList.classList.add("hidden");
-                userCoursesListButton.classList.remove("bg-white");
-                allCoursesListButton.classList.add("bg-white");
-            });
-            userCoursesListButton.addEventListener("click", function () {
-                userCoursesList.classList.remove("hidden");
-                allCoursesList.classList.add("hidden");
-                userCoursesListButton.classList.add("bg-white");
-                allCoursesListButton.classList.remove("bg-white");
-            });
-
-        });
-    </script>
 </body>
 </html>

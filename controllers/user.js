@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 class UserController {
     static async register(req, res) {
-        const { email, password, confirmPassword, message} = req.query;
+        const { email, password, confirmPassword, message } = req.query;
         try {
             if (password != confirmPassword) return res.redirect("/register?message=password doesn't match")
             if (email && password) {
@@ -33,7 +33,7 @@ class UserController {
         const { email, password } = req.body;
 
         try {
-            const user = await User.findOne({ include: UserProfile,where: { email } });
+            const user = await User.findOne({ include: UserProfile, where: { email } });
             if (!user) throw new Error('Email not found');
             const isValidPassword = await bcrypt.compare(password, user.password);
             if (!isValidPassword) throw new Error('Sorry, your password was incorrect.');
@@ -80,19 +80,29 @@ class UserController {
     static async academy(req, res) {
         try {
             const { user } = req.session
-            const allCourses = await Course.findAll({
-                order: [['name', 'ASC']]
-            });
+            const { category } = req.query
+            let userCourses = []
+            let allCourses = []
+            let where = {}
 
-            const userCourses = await User.findByPk(user.id, {
-                include: {
-                    model: Course
-                },
-                attributes: ['id'],
-                order: [[{ model: Course}, 'name', 'ASC']]
-            })
-            res.render('academy', { allCourses, userCourses, user})
+            const allCategories = await Category.findAll()
+
+            if (category === 'myclass') {
+                userCourses = await User.findByPk(user.id, {
+                    include: {
+                        model: Course
+                    },
+                    attributes: ['id'],
+                    order: [[{ model: Course }, 'name', 'ASC']]
+                })
+                return res.render('academy', { allCourses, userCourses, user, allCategories })
+            }
+
+            if (category) where = { CategoryId: category }
+            allCourses = await Course.findAll({ where: where, order: [['name', 'ASC']] });
+            res.render('academy', { allCourses, userCourses, user, allCategories })
         } catch (error) {
+            console.log(error)
             res.send(error)
         }
     }
@@ -111,7 +121,7 @@ class UserController {
             })
             res.render('course', { course, userEnrolled, user })
         } catch (error) {
-            
+
         }
     }
 
@@ -121,17 +131,17 @@ class UserController {
         try {
             const pathCourses = await Category.findByPk(id, {
                 include: Course,
-                order: [[{model: Course}, 'name', 'ASC']]
+                order: [[{ model: Course }, 'name', 'ASC']]
             })
             res.render('category', { pathCourses, user })
         } catch (error) {
             res.send(error)
         }
     }
-    
+
     static async courseClass(req, res) {
         const { id } = req.params;
-        const kelas = await Course.findByPk(id) 
+        const kelas = await Course.findByPk(id)
         try {
             res.render('course-class', { kelas })
         } catch (error) {
@@ -165,7 +175,7 @@ class UserController {
     }
 
     //landing page
-    static async landing(req, res){
+    static async landing(req, res) {
         try {
             res.render('LandingPage')
         } catch (error) {
@@ -176,8 +186,8 @@ class UserController {
     static async editUser(req, res) {
         const { user } = req.session
         try {
-            const selectedUser =  await UserProfile.findOne({
-                where : {
+            const selectedUser = await UserProfile.findOne({
+                where: {
                     UserId: user.id
                 }
             })
@@ -195,7 +205,7 @@ class UserController {
                 }
             })
             const { dob, ...rest } = req.body;
-            const updateObj = {...rest}
+            const updateObj = { ...rest }
             if (dob) updateObj.dob = dob
             await selectedUser.update(updateObj)
             res.redirect('/dashboard')

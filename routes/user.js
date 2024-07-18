@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const PublicController = require('../controllers/public');
 const UserController = require('../controllers/user');
-const { isLoggedin, publicAcademy, publicDashboard }= require('../middlewares/auth');
+const { isLoggedin, publicDashboard }= require('../middlewares/auth');
 const { isPurchase } = require('../middlewares/purchaseStatus');
 
 router.get('/', UserController.landing)
@@ -10,9 +10,8 @@ router.get('/register', UserController.register)
 router.get('/login', UserController.login)
 router.post('/login', UserController.loginPost)
 
-router.get('/courses', PublicController.courses)
 router.get('/event', PublicController.event)
-router.get('/academy', publicAcademy, UserController.academy)
+router.get('/academy', UserController.academy)
 router.get('/course/:id', UserController.course)
 router.get('/home', PublicController.home)
 router.get('/dashboard', publicDashboard, UserController.dashboard)
