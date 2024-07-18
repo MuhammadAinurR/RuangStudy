@@ -25,7 +25,7 @@ class UserController {
                 return res.redirect("/register?message=email already registered")
             }
             if (error.name === "SequelizeValidationError") {
-                // validation 
+                // validation isEmail, password length
                 return res.redirect(`/register?message=${errorFormat(error)}`)
             }
             res.send(error)
@@ -65,21 +65,10 @@ class UserController {
         try {
             const { message } = req.query;
             const { user } = req.session
-            const userProfile = await User.findByPk(user.id, {
-                include: {
-                    model: UserProfile,
-                    attributes: ['name']
-                },
-                attributes: ['id', 'email']
-            });
-            const courseDetails = await User.findByPk(user.id, {
-                include: {
-                    model: Course
-                },
-                attributes: ['id']
-            })
+            const { userProfile, courseDetails } = await User.getDashboard({ user })
             res.render('user-dashboard', { userProfile, courseDetails, user, message })
         } catch (error) {
+            console.log(error)
             res.send(error)
         }
     }

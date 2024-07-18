@@ -1,5 +1,3 @@
-const { User, Course, UserCourse, UserProfile, Category } = require('../models')
-
 class PublicController {
     static async event(req, res) {
         const { user } = req.session

@@ -12,11 +12,11 @@
     {
         "email": "ainurmohpublic@gmail.com",
         "password": "0000",
-        "role": "SuperUser"
+        "role": "Public"
     },
     {
         "email": "vincentpublic@gmail.com",
         "password": "0000",
-        "role": "SuperUser"
+        "role": "Public"
     }
 ]

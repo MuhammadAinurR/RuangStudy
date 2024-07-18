@@ -1,4 +1,4 @@
-const { where, Op } = require('sequelize');
+const { Op } = require('sequelize');
 const { Category, Course, User, UserCourse, UserProfile } = require('../models');
 
 class AdminController {

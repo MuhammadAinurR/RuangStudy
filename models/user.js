@@ -7,15 +7,28 @@ const emailjs = require('emailjs-com')
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       // define association here 
       User.hasOne(models.UserProfile)
       User.belongsToMany(models.Course, { through: models.UserCourse });
+    }
+
+    // static method for get the data
+    static async getDashboard({ user }) {
+      const userProfile = await User.findByPk(user.id, {
+        include: {
+          model: sequelize.models.UserProfile,
+          attributes: ['name']
+        },
+        attributes: ['id', 'email']
+      });
+      const courseDetails = await User.findByPk(user.id, {
+        include: {
+          model: sequelize.models.Course
+        },
+        attributes: ['id']
+      })
+      return { userProfile, courseDetails }
     }
   }
   User.init({
