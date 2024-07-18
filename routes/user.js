@@ -15,6 +15,7 @@ router.use((req, res, next) => {
     next()
 })
 
+// login middleware
 router.use(isLoggedin)
 router.get('/dashboard', UserController.dashboard)
 router.get('/academy', UserController.academy)
