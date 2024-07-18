@@ -15,7 +15,11 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     get formatDob(){
-      return this.dob.toISOString().split('T')[0];
+      if(this.dob){
+        return this.dob.toISOString().split('T')[0];
+      }else{
+        return this.dob
+      }
     }
   }
   UserProfile.init({
