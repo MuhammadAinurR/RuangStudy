@@ -4,8 +4,6 @@ const bcrypt = require('bcryptjs');
 
 class UserController {
     static async register(req, res) {
-        console.log(req.query)
-
         const { email, password, confirmPassword, message} = req.query;
         try {
             if (password != confirmPassword) return res.redirect("/register?message=password doesn't match")
@@ -73,8 +71,7 @@ class UserController {
                 },
                 attributes: ['id']
             })
-
-            console.log(req.session.user)
+            console.log(user)
             res.render('user-dashboard', { userProfile, courseDetails, user, message })
         } catch (error) {
             res.send(error)

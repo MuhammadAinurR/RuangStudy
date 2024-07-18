@@ -8,5 +8,15 @@
         "email": "vincentcan909@gmail.com",
         "password": "0000",
         "role": "SuperUser"
+    },
+    {
+        "email": "ainurmohpublic@gmail.com",
+        "password": "0000",
+        "role": "SuperUser"
+    },
+    {
+        "email": "vincentpublic@gmail.com",
+        "password": "0000",
+        "role": "SuperUser"
     }
 ]
