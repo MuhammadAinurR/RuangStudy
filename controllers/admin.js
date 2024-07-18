@@ -29,8 +29,9 @@ class AdminController {
     }
 
     static async getAddCategories(req, res){
+        const { err } = req.query;
         try {
-            res.render('admin/AddCategory');
+            res.render('admin/AddCategory', { err });
         } catch (error) {
             console.log(error);
             res.send(error);
@@ -46,8 +47,15 @@ class AdminController {
 
             res.redirect(`/admin/categories?msg=${msg}`);
         } catch (error) {
-            console.log(error);
-            res.send(error);
+            if(error.name === "SequelizeValidationError"){
+                const err = error.errors.map((e) => {
+                    return e.message
+                })
+
+                res.redirect(`/admin/categories/add?err=${err}`)
+            }else{
+                res.send(error);
+            }
         }
     }
 
@@ -90,9 +98,10 @@ class AdminController {
     }
 
     static async getAddCourse(req, res){
+        const { err } = req.query;
         try {
             const categories = await Category.findAll() 
-            res.render('admin/AddCourse', { categories });
+            res.render('admin/AddCourse', { categories, err });
         } catch (error) {
             console.log(error);
             res.send(error);
@@ -108,17 +117,25 @@ class AdminController {
 
             res.redirect(`/admin/courses?msg=${msg}`);
         } catch (error) {
-            console.log(error);
-            res.send(error);
+            if(error.name === "SequelizeValidationError"){
+                const err = error.errors.map((e) => {
+                    return e.message
+                })
+
+                res.redirect(`/admin/courses/add?err=${err}`)
+            }else{
+                res.send(error);
+            }
         }
     }
 
     static async getEditCourse(req, res){
         const { id } = req.params;
+        const { err } = req.query;
         try {
             const categories = await Category.findAll() 
             const course = await Course.findByPk(id) 
-            res.render('admin/EditCourse', { course, categories });
+            res.render('admin/EditCourse', { course, categories, err });
         } catch (error) {
             console.log(error);
             res.send(error);
@@ -137,8 +154,15 @@ class AdminController {
 
             res.redirect(`/admin/courses?msg=${msg}`);
         } catch (error) {
-            console.log(error);
-            res.send(error);
+            if(error.name === "SequelizeValidationError"){
+                const err = error.errors.map((e) => {
+                    return e.message
+                })
+
+                res.redirect(`/admin/courses/${id}/edit?err=${err}`)
+            }else{
+                res.send(error);
+            }
         }
     }
 

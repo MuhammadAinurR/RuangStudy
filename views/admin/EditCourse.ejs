@@ -24,6 +24,19 @@
             /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
             box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
         }
+
+        .card-error{
+            padding: 20px;
+            padding-bottom: 0;
+            margin-bottom: 18px;
+            box-shadow:none;
+            background-color: rgb(253, 188, 188);
+            border: none;
+        }
+
+        .p-err{
+            color: rgb(145, 1, 1);
+        }
     </style>
 </head>
 
@@ -35,6 +48,13 @@
         <hr>
         <div style="display: flex; justify-content: center;">
             <div class="container-table" style="width: 70%;">
+                <% if (err) { %>
+                    <div class="card card-error">
+                        <% err.split(',').forEach((e) => { %>
+                            <p class="p-err"><%= e %></p>
+                        <% }) %>
+                    </div>
+                <% } %>
                 <div class="card">
                     <form action="/admin/courses/<%= course.id %>/edit" method="post">
                         <label for="category" class="form-label">Category</label>
