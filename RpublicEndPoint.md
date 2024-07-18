@@ -1,1 +1,0 @@
-- http://localhost:3000/users | GET => get all users
