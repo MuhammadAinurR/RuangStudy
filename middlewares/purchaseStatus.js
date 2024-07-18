@@ -4,7 +4,6 @@ const isPurchase = async (req, res, next) => {
     if (!req.session.user) return res.redirect('/login?message=you need login to get the access');
     const UserId = +req.session.user.id;
     const CourseId = +req.params.id;
-    console.log(UserId, CourseId)
     const data = await UserCourse.findOne({
         where: {
             [Op.and]: [{UserId: UserId}, {CourseId: CourseId}]

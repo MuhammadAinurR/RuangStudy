@@ -5,6 +5,12 @@ const isLoggedin = (req, res, next) => {
     res.redirect('/login?message=you need login to get the access')
 }
 
+const isSuperUser = (req, res, next) => {
+    if (req.session.user === undefined) return res.redirect('/login?message=you need login to get the access')
+    if (req.session.user.role !== 'SuperUser') return res.redirect('/login?message=your account doesnt have access for this site');
+    next();
+}
+
 const sessionConfig = session({
     secret: 'secret101',
     resave: false,
@@ -15,4 +21,4 @@ const sessionConfig = session({
     }
 })
 
-module.exports = { isLoggedin, sessionConfig };
+module.exports = { isLoggedin, sessionConfig, isSuperUser };

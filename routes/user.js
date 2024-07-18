@@ -24,12 +24,12 @@ router.get('/course/:id', UserController.course)
 router.get('/course/:id/class', isPurchase, UserController.courseClass)
 router.get('/dashboard', UserController.dashboard)
 router.get('/academy', UserController.academy)
-router.get('/signout', UserController.logOut)
 router.get('/category/:id', UserController.category)
 router.get('/purchase/:UserId/:CourseId', UserController.purchase)
 router.post('/purchase/:UserId/:CourseId', UserController.purchasePost)
 router.get('/user/edit', UserController.editUser)
 router.post('/user/edit', UserController.editUserPost)
+router.get('/signout', UserController.logOut)
 
 
 module.exports = router;

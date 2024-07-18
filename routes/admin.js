@@ -1,6 +1,10 @@
 const AdminController = require('../controllers/admin');
+const { isSuperUser } = require('../middlewares/auth');
 
 const router = require('express').Router()
+
+// apply middleware for admin routes
+router.use(isSuperUser);
 
 router.get('/admin', AdminController.home);
 

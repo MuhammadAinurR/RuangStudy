@@ -4,8 +4,11 @@ const bcrypt = require('bcryptjs');
 
 class UserController {
     static async register(req, res) {
-        const { email, password } = req.query;
+        console.log(req.query)
+
+        const { email, password, confirmPassword, message} = req.query;
         try {
+            if (password != confirmPassword) return res.redirect("/register?message=password doesn't match")
             if (email && password) {
                 await User.create({
                     ...req.query,
@@ -14,8 +17,11 @@ class UserController {
                 })
                 return res.redirect('/dashboard')
             }
-            res.render('register-form')
+            res.render('register-form', { message })
         } catch (error) {
+            if (error.name === "SequelizeUniqueConstraintError") {
+                return res.redirect("/register?message=email already registered")
+            }
             res.send(error)
         }
     }
@@ -29,11 +35,11 @@ class UserController {
         const { email, password } = req.body;
 
         try {
-            const user = await User.findOne({ where: { email } });
+            const user = await User.findOne({ include: UserProfile,where: { email } });
             if (!user) throw new Error('Email not found');
             const isValidPassword = await bcrypt.compare(password, user.password);
             if (!isValidPassword) throw new Error('Sorry, your password was incorrect.');
-            req.session.user = { id: user.id, email: user.email, role: user.role }; // set session on controller when logged in
+            req.session.user = { id: user.id, email: user.email, role: user.role, image: user.UserProfile.image }; // set session on controller when logged in
             res.redirect('/dashboard');
         } catch (error) {
             console.error(error.message);
@@ -67,6 +73,8 @@ class UserController {
                 },
                 attributes: ['id']
             })
+
+            console.log(req.session.user)
             res.render('user-dashboard', { userProfile, courseDetails, user, message })
         } catch (error) {
             res.send(error)
@@ -156,7 +164,6 @@ class UserController {
             })
             res.redirect('/dashboard?message=selamat kelas anda telah bertambah')
         } catch (error) {
-            console.log(error)
             res.send(error)
         }
     }
@@ -178,7 +185,6 @@ class UserController {
                     UserId: user.id
                 }
             })
-            console.log(selectedUser.dataValues)
             res.render('edit-profil-form', { user, selectedUser, dateFormat })
         } catch (error) {
             res.send(error)
@@ -196,10 +202,8 @@ class UserController {
             const updateObj = {...rest}
             if (dob) updateObj.dob = dob
             await selectedUser.update(updateObj)
-            console.log(req.body)
             res.redirect('/dashboard')
         } catch (error) {
-            console.log(error)
             res.send(error)
         }
     }

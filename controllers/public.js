@@ -14,11 +14,9 @@ class PublicController {
                 order: [['name', 'ASC']]
             });
             const allCategories = await Category.findAll()
-            console.log(allCategories)
             res.render('courses', { allCourses, allCategories, user })
         } catch (error) {
             res.send(error)
-            console.log(error)
         }
     }
 
