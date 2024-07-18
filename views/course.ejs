@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<%- include('./partials/navbar') %>
+<body>
+    <div class="flex justify-center w-full">
+        <div class="w-[80%] py-5 flex justify-between items-center">
+            <div class="w-4/5">
+                <p class="font-light"><a class="underline underline-offset-2" href="/category/<%= course.Category.id %>"><%= course.Category.name %></a> Learning Path</p>
+                <h1 class="text-3xl mt-3">Belajar <%= course.name %></h1>
+                <p class="font-light w-4/5"><%= course.description %></p>
+            </div>
+            <div>
+                <button class="shadow-md h-[50px] px-3 rounded bg-[#2D3E4F] text-white">Belajar Sekarang</button>
+                <p class="font-extralight text-sm text-center"><%= userEnrolled %> already enrolled</p>
+            </div>
+
+        </div>
+    </div>
+    <hr class="w-full">
+</body>
+</html>

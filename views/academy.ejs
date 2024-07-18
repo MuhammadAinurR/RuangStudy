@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#F4F4F5] h-full">
+    <%- include('./partials/navbar') %>
+    <main class="flex justify-center">
+        <div class="w-[80%]">
+            <div class="my-4 flex gap-4">
+                <button id="all-courses-list-button" class="bg-white px-3 py-2 rounded-md shadow-md font-light">Semua Kelas</button>
+                <button id="user-courses-list-button" class="bg-white px-3 py-2 rounded-md shadow-md font-light">Kelas yang Dimiliki</button>
+            </div>
+            <div id="all-courses-list" class="bg-white shadow-md rounded-md px-5 my-5">
+                <% allCourses.forEach(e => { %>
+                 <div class="flex justify-between">
+                    <p class="font-light py-4"><%= e.name %></p>
+                    <a href="/course/<%= e.id %>"><button class="bg-[#2D3E4F] text-white rounded-md my-3 px-2 py-1">Koridor Kelas</button></a>
+                 </div>
+                 <hr>
+                <% }) %>
+            </div>
+            <div id="user-courses-list" class="hidden bg-white shadow-md rounded-md px-5 my-5">
+                <% userCourses.Courses.forEach(e => { %>
+                 <div class="flex justify-between">
+                    <p class="font-light py-4"><%= e.name %></p>
+                    <a href="/course/<%= e.id %>"><button class="bg-[#2D3E4F] text-white rounded-md my-3 px-2 py-1">Koridor Kelas</button></a>
+                 </div>
+                 <hr>
+                <% }) %>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let allCoursesListButton = document.getElementById('all-courses-list-button')
+            let userCoursesListButton = document.getElementById('user-courses-list-button')
+
+            var allCoursesList = document.getElementById("all-courses-list");
+            var userCoursesList = document.getElementById("user-courses-list");
+
+            // Toggle menu visibility when clicking the button
+            allCoursesListButton.addEventListener("click", function () {
+                allCoursesList.classList.remove("hidden");
+                userCoursesList.classList.add("hidden");
+                userCoursesListButton.classList.remove("bg-white");
+                allCoursesListButton.classList.add("bg-white");
+            });
+            userCoursesListButton.addEventListener("click", function () {
+                userCoursesList.classList.remove("hidden");
+                allCoursesList.classList.add("hidden");
+                userCoursesListButton.classList.add("bg-white");
+                allCoursesListButton.classList.remove("bg-white");
+            });
+
+        });
+    </script>
+</body>
+</html>

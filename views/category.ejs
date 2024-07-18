@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<%- include('./partials/navbar') %>
+<body class="bg-[#F4F7F8]">
+    <div class="flex justify-center w-full">
+        <div class="w-[80%] py-5 flex justify-between items-center">
+            <div class="w-4/5">
+                <h1 class="text-3xl mt-3">Learning Path  <%= pathCourses.name %> Developer</h1>
+                <p class="font-light w-4/5"></p>
+            </div>
+
+        </div>
+    </div>
+    <hr class="w-full">
+    <div class="flex justify-center w-full mt-5">
+        <div class="w-[80%]">
+            <dif class="grid grid-cols-3 gap-10">
+                <% pathCourses.Courses.forEach(e => { %>
+                   <a href="/course/<%= e.id %>">
+                    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow h-[300px]">
+                        <img class="h-3/5 w-full rounded-t-lg" src="<%= e.image %>" alt="" />
+                        <div class="h-2/5 p-3">
+                            <div class="h-full flex flex-col justify-between">
+                                <h5 class="mb-2 text-2xl tracking-tight text-gray-900"><%= e.name %></h5>
+                                <p>Course</p>
+                            </div>
+                        </div>
+                    </div>
+                   </a>
+                <% }) %>
+            </dif>
+        </div>
+    </div>
+</body>
+</html>
