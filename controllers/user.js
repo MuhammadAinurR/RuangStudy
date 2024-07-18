@@ -159,5 +159,14 @@ class UserController {
             res.send(error)
         }
     }
+
+    //landing page
+    static async landing(req, res) {
+        try {
+            res.render('LandingPage')
+        } catch (error) {
+            res.send(error)
+        }
+    }
 }
 module.exports = UserController;
