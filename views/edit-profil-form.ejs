@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <%- include('./partials/navbar.ejs', { user }) %>
+    <div class="flex justify-center">
+        <div class="w-[40%]">
+            <form action="" method="post">
+                <div class="grid grid-cols-1 my-5 gap-y-2">
+                 <label for="">Name</label>
+                 <input class="border pl-2" type="text" name="name" id="" value="<%= selectedUser.name %>">
+                 <label for="">Image</label>
+                 <input class="border pl-2" type="text" name="image" id="" value="<%= selectedUser.image %>">
+                 <label for="">Date of Birth</label>
+                 <input class="border pl-2" type="date" name="dob" id="" value="<%= dateFormat(selectedUser.dob) %>">
+                 <label for="">Place of Birth</label>
+                 <input class="border pl-2" type="text" name="pob" id="" value="<%= selectedUser.pob %>">
+                 <label for="">Phone Number</label>
+                 <input class="border pl-2" type="text" name="phoneNumber" id="" value="<%= selectedUser.phoneNumber %>">
+                 <label for="">Last Education</label>
+                 <input class="border pl-2" type="text" name="lastEducation" id="" value="<%= selectedUser.lastEducation %>">
+                </div>
+                <div class="flex justify-center my-4">
+                    <button class="bg-blue-500 w-[80px] text-white p-1 rounded-md hover:bg-blue-700">Edit</button>
+                </div>
+             </form>
+
+        </div>
+
+    </div>
+</body>
+</html>

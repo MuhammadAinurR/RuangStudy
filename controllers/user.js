@@ -1,3 +1,4 @@
+const dateFormat = require('../helpers/dateFormat');
 const { User, Course, UserCourse, UserProfile, Category } = require('../models')
 const bcrypt = require('bcryptjs');
 
@@ -165,6 +166,40 @@ class UserController {
         try {
             res.render('LandingPage')
         } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async editUser(req, res) {
+        const { user } = req.session
+        try {
+            const selectedUser =  await UserProfile.findOne({
+                where : {
+                    UserId: user.id
+                }
+            })
+            console.log(selectedUser.dataValues)
+            res.render('edit-profil-form', { user, selectedUser, dateFormat })
+        } catch (error) {
+            res.send(error)
+        }
+    }
+    static async editUserPost(req, res) {
+        const { user } = req.session
+        try {
+            const selectedUser = await UserProfile.findOne({
+                where: {
+                    UserId: user.id
+                }
+            })
+            const { dob, ...rest } = req.body;
+            const updateObj = {...rest}
+            if (dob) updateObj.dob = dob
+            await selectedUser.update(updateObj)
+            console.log(req.body)
+            res.redirect('/dashboard')
+        } catch (error) {
+            console.log(error)
             res.send(error)
         }
     }
