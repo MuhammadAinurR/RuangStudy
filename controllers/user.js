@@ -161,7 +161,7 @@ class UserController {
     }
 
     //landing page
-    static async landing(req, res) {
+    static async landing(req, res){
         try {
             res.render('LandingPage')
         } catch (error) {

@@ -4,6 +4,8 @@ const UserController = require('../controllers/user');
 const { isLoggedin }= require('../middlewares/auth');
 const { isPurchase } = require('../middlewares/purchaseStatus');
 
+router.get('/', UserController.landing)
+
 router.get('/register', UserController.register)
 router.get('/login', UserController.login)
 router.post('/login', UserController.loginPost)
