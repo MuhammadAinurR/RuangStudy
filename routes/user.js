@@ -11,6 +11,7 @@ router.get('/login', UserController.login)
 router.post('/login', UserController.loginPost)
 
 router.get('/courses', PublicController.courses)
+router.get('/event', PublicController.event)
 
 // force dummy login => Uncomment to force the login so the development will be easier
 // router.use((req, res, next) => {

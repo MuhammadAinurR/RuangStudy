@@ -20,5 +20,14 @@ class PublicController {
         }
     }
 
+    static async event(req, res) {
+        const { user } = req.session
+        try {
+            res.render('event', { user })
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
 }
 module.exports = PublicController;
