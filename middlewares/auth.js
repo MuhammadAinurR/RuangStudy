@@ -7,7 +7,7 @@ const isLoggedin = (req, res, next) => {
 
 const isSuperUser = (req, res, next) => {
     if (req.session.user === undefined) return res.redirect('/login?message=you need login to get the access')
-    if (req.session.user.role !== 'SuperUser') return res.redirect('/login?message=your account doesnt have access for this site');
+    if (req.session.user.role !== 'SuperUser') return res.redirect('/dashboard?message=your account doesnt have access for admin panel');
     next();
 }
 
