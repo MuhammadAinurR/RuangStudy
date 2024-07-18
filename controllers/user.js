@@ -16,7 +16,7 @@ class UserController {
                     createdAt: new Date(),
                     updatedAt: new Date()
                 })
-                return res.redirect('/dashboard')
+                return res.redirect('/login?messageSuccess=email success registered, login now!')
             }
             res.render('register-form', { message })
         } catch (error) {
@@ -33,8 +33,8 @@ class UserController {
     }
 
     static login(req, res) {
-        const { message } = req.query
-        res.render('login-form', { message })
+        const { message, messageSuccess } = req.query
+        res.render('login-form', { message, messageSuccess })
     }
 
     static async loginPost(req, res) {

@@ -18,5 +18,29 @@
     {
         "UserId": 2,
         "CourseId": 2
+    },
+    {
+        "UserId": 3,
+        "CourseId": 1
+    },
+    {
+        "UserId": 3,
+        "CourseId": 2
+    },
+    {
+        "UserId": 3,
+        "CourseId": 3
+    },
+    {
+        "UserId": 4,
+        "CourseId": 1
+    },
+    {
+        "UserId": 4,
+        "CourseId": 2
+    },
+    {
+        "UserId": 4,
+        "CourseId": 3
     }
 ]

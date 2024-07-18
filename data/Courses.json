@@ -2,35 +2,35 @@
     {
         "CategoryId": 1,
         "name": "Tailwind basic",
-        "description": "Belajar tailwind guys",
+        "description": "Explore Tailwind CSS for rapid UI development. Learn utility-first workflow, responsive design, and custom component styling. Ideal for front-end developers seeking efficient and customizable web design techniques without traditional CSS constraints.",
         "image": "https://miro.medium.com/v2/resize:fit:1400/1*_6ooq0R60ba3UT5c-QVemA.png",
         "jumlahModul": 5
     },
     {
         "CategoryId": 1,
         "name": "Bootstrap basic",
-        "description": "Belajar tailwind guys",
+        "description": "Learn Bootstrap for responsive web design. Explore grid systems, components, and customization. Perfect for developers aiming to create modern, mobile-first websites efficiently with Bootstrap's robust CSS and JS toolkit.",
         "image": "https://getbootstrap.com/docs/5.3/assets/img/bootstrap-icons.png",
         "jumlahModul": 5
     },
     {
         "CategoryId": 2,
         "name": "Rest-API",
-        "description": "Belajar tailwind guys",
+        "description": "Master creating RESTful APIs from scratch. Cover HTTP methods, authentication, data validation, and integration with frameworks like Express. Ideal for developers aiming to design scalable and secure APIs for modern web and mobile applications.",
         "image": "https://www.datocms-assets.com/48294/1680848744-rest-api-1-rest-api.png?auto=format",
         "jumlahModul": 5
     },
     {
         "CategoryId": 2,
         "name": "Golang basic",
-        "description": "Belajar tailwind guys",
+        "description": "Discover Go's simplicity and efficiency. Learn syntax, concurrency with goroutines, and build scalable apps. Ideal for developers diving into backend services and cloud-native applications with Go's robust standard library and modern features.",
         "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn9KiQDU-UBKjLt9fLXHjyd4YVLjoDgArveA&s",
         "jumlahModul": 5
     },
     {
         "CategoryId": 2,
         "name": "Python basic",
-        "description": "Belajar tailwind guys",
+        "description": "Master Python fundamentals: syntax, data types, OOP. Includes web development basics with Flask, data analysis with Pandas, and more. Ideal for beginners and those advancing in Python programming.",
         "image": "https://learnersgalaxy.ai/wp-content/uploads/2024/01/Python-Symbol.png",
         "jumlahModul": 5
     }
